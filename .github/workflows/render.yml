@@ -1,0 +1,56 @@
+name: Render Remotion Video
+
+on:
+  push:
+    paths:
+      - 'public/script.srt'
+      - 'public/logos/**'
+      - 'src/**'
+  workflow_dispatch:
+    inputs:
+      scene:
+        description: 'Render specific scene (leave empty for full video)'
+        required: false
+        default: 'Main'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Install Chromium for Remotion
+        run: npx remotion browser ensure
+
+      - name: Render video
+        run: |
+          npx remotion render src/index.ts Main out/video.mp4 \
+            --codec h264 \
+            --crf 18 \
+            --concurrency 2
+        env:
+          CHROMIUM_FLAGS: "--disable-dev-shm-usage"
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: brilliant-connect-video
+          path: out/video.mp4
+          retention-days: 7
+
+      - name: Show file size
+        run: |
+          echo "✅ Render complete!"
+          ls -lh out/video.mp4

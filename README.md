@@ -1,2 +1,0 @@
-# brilliant-motion
-brilliant-motion
