@@ -20,8 +20,8 @@ export const theme = {
     white: "#FFFFFF",
   },
   fonts: {
-    display: "'Hind Siliguri', 'FreeSans', sans-serif",
-    body: "'Hind Siliguri', 'FreeSans', sans-serif",
+    display: "'Noto Sans Bengali', 'Noto Sans', sans-serif",
+    body: "'Noto Sans Bengali', 'Noto Sans', sans-serif",
   },
   ease: {
     out: Easing.bezier(0.16, 1, 0.3, 1),
