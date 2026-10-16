@@ -15,11 +15,11 @@ jobs:
           fc-cache -fv
       - name: Install dependencies
         run: npm install
-      - name: Install Chromium
+      - name: Ensure Chromium
         run: npx remotion browser ensure
-      - name: Render video
-        run: npx remotion render src/index.ts Main out/video.mp4 --codec h264 --crf 18
-      - name: Upload artifact
+      - name: Render
+        run: npx remotion render src/index.ts Main out/video.mp4 --codec h264 --crf 17
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: video

@@ -7,8 +7,7 @@
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true
+    "moduleResolution": "node"
   },
   "include": ["src"]
 }
